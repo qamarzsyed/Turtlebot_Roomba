@@ -1,0 +1,40 @@
+<launch>
+  <arg name="model" default="$(find turtlebot_description)/urdf/turtlebot_gazebo.urdf.xacro"/>
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="z" default="0.0"/>
+  <arg name="R" default="0.0"/>
+  <arg name="P" default="0.0"/>
+  <arg name="Y" default="0.0"/>
+  <arg name="gui" default="true"/>
+  <arg name="stacks" default="hexagons"/>
+  <arg name="3d_sensor" default="kinect"/>
+  <arg name="laser_enabled" default="false"/>
+  <arg name="world_file" default="$(find turtlebot_gazebo)/worlds/playground.world"/>
+
+  <include file="$(find turtlebot_gazebo)/launch/includes/kobuki.launch.xml">
+    <arg name="x" value="$(arg x)"/>
+    <arg name="y" value="$(arg y)"/>
+    <arg name="z" value="$(arg z)"/>
+    <arg name="R" value="$(arg R)"/>
+    <arg name="P" value="$(arg P)"/>
+    <arg name="Y" value="$(arg Y)"/>
+    <arg name="stacks" value="$(arg stacks)"/>
+    <arg name="3d_sensor" value="$(arg 3d_sensor)"/>
+    <arg name="laser_enabled" value="$(arg laser_enabled)"/>
+    <arg name="model" value="$(arg model)"/>
+  </include>
+
+  <include file="$(find turtlebot_gazebo)/launch/includes/amcl.launch.xml"/>
+
+  <include file="$(find turtlebot_gazebo)/launch/includes/gmapping.launch.xml"/>
+
+  <include file="$(find turtlebot_gazebo)/launch/includes/rviz.launch.xml">
+    <arg name="gui" value="$(arg gui)"/>
+  </include>
+
+  <node name="spawn_turtlebot" pkg="turtlebot_gazebo" type="spawn_model" args="-urdf -model turtlebot -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg R) -P $(arg P) -Y $(arg Y) -file $(arg model)" output="screen"/>
+
+  <node name="world_spawner" pkg="gazebo_ros" type="spawn_model" args="-file $(find turtlebot_gazebo)/worlds/$(arg world_file) -urdf -model turtlebot -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg R) -P $(arg P) -Y $(arg Y)" output="screen"/>
+
+</launch>
