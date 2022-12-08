@@ -9,6 +9,10 @@ find_package(std_msgs REQUIRED)
 find_package(gazebo_ros REQUIRED)
 find_package(turtlesim REQUIRED)
 
+# Turtlebot3 libraries
+find_package(turtlebot3_msgs REQUIRED)
+find_package(turtlebot3_description REQUIRED)
+
 include_directories(include)
 
 # roomba includes
@@ -16,6 +20,18 @@ include_directories(include ${roomba_INCLUDE_DIRS})
 
 ament_export_dependencies(rclcpp)
 ament_export_dependencies(roomba)
+ament_export_include_directories(include)
+ament_export_libraries(turtlebot3_node)
+ament_export_dependencies(
+  rclcpp
+  rclcpp_components
+  sensor_msgs
+  geometry_msgs
+  tf2_ros
+  nav_msgs
+  turtlebot3_msgs
+  turtlebot3_description
+)
 
 # add executables
 add_executable(move_node src/move_node.cpp)
