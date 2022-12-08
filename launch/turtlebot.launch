@@ -10,7 +10,6 @@
   <arg name="stacks" default="hexagons"/>
   <arg name="3d_sensor" default="kinect"/>
   <arg name="laser_enabled" default="false"/>
-  <arg name="world_file" default="$(find turtlebot_gazebo)/worlds/playground.world"/>
 
   <include file="$(find turtlebot_gazebo)/launch/includes/kobuki.launch.xml">
     <arg name="x" value="$(arg x)"/>
@@ -35,6 +34,5 @@
 
   <node name="spawn_turtlebot" pkg="turtlebot_gazebo" type="spawn_model" args="-urdf -model turtlebot -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg R) -P $(arg P) -Y $(arg Y) -file $(arg model)" output="screen"/>
 
-  <node name="world_spawner" pkg="gazebo_ros" type="spawn_model" args="-file $(find turtlebot_gazebo)/worlds/$(arg world_file) -urdf -model turtlebot -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg R) -P $(arg P) -Y $(arg Y)" output="screen"/>
 
 </launch>

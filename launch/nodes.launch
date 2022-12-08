@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="move_node" type="move_node" name="move_node" output="screen"/>
+  <node pkg="rotate_node" type="rotate_node" name="rotate_node" output="screen"/>
+</launch>
