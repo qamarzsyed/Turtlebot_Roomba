@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package>
+  <name>roomba</name>
+  <version>0.1.0</version>
+  <description>A package for simulating a roomba turtlebot in Gazebo.</description>
+  <maintainer email="qsyed@umd.edu">Qamar Syed</maintainer>
+  
+  <license>MIT</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>gazebo_ros</build_depend>
+  <build_depend>turtlebot_msgs</build_depend>
+  <run_depend>gazebo_ros</run_depend>
+  <run_depend>turtlebot_msgs</run_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>laser_scan_publisher</run_depend>
+  <export>
+    <roomba plugin="${prefix}/roomba/roomba.xml"/>
+    <roomba gazebo_world="${prefix}/worlds/roomba_world.world"/>
+  </export>
+  <node name="move_node" pkg="move_node" type="move_node.cpp" output="screen"/>
+  <node name="rotate_node" pkg="rotate_node" type="rotate_node.cpp" output="screen"/>
+</package>
